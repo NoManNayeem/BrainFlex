@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register for BrainFlex</title>
+    <title>Contact BrainFlex</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -10,28 +10,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom styles -->
     <style>
-        /* General styles */
         body {
             font-family: 'Roboto', sans-serif; /* Modern font */
-            background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(146, 14, 228, 1) 65%, rgba(0, 212, 255, 1) 100%); /* Vibrant gradient background */
+            background-color: #f8f9fa; /* Light gray background */
             margin: 0;
             padding: 0;
         }
 
         /* Navbar styling */
         .navbar {
-            background-color: #2c3e50; /* Darker navbar for contrast */
+            background-color: #2c3e50; /* Dark navbar for contrast */
             padding: 15px; /* Padding for comfort */
         }
 
         .navbar-brand {
-            font-size: 1.5em; /* Larger font size for brand name */
-            color: white; /* High contrast for readability */
+            font-size: 1.5em; /* Larger font for brand name */
+            color: white; /* High contrast for visibility */
         }
 
         .navbar-nav .nav-link {
-            color: white; /* White links for readability */
-            font-size: 1.2em; /* Larger font for better visibility */
+            color: white; /* White links for visibility */
+            font-size: 1.2em; /* Larger font for readability */
             transition: color 0.3s; /* Smooth transition on hover */
         }
 
@@ -39,17 +38,27 @@
             color: #18bc9c; /* Change color on hover */
         }
 
-        /* Registration container styling */
-        .register-container {
-            max-width: 500px; /* Maximum width for better readability */
-            margin: 50px auto; /* Centered container */
+        /* Contact container styling */
+        .container {
+            padding-top: 2em; /* Consistent padding */
+            padding-bottom: 2em; /* Consistent padding */
+        }
+
+        .contact-heading {
+            text-align: center; /* Centered text */
+            font-size: 2.5em; /* Larger font for heading */
+            margin-bottom: 20px; /* Space below heading */
+        }
+
+        .contact-form {
+            max-width: 600px; /* Maximum width for form */
+            margin: 0 auto; /* Centered form */
             padding: 30px; /* Padding for comfort */
-            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-            border-radius: 10px; /* Smooth rounded corners */
+            background-color: white; /* White background */
+            border-radius: 10px; /* Rounded corners */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
         }
 
-        /* Form control styling */
         .form-control:focus {
             border-color: #007bff; /* Bootstrap's primary color */
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Box shadow on focus */
@@ -58,8 +67,8 @@
         .btn-custom {
             background-color: #18bc9c; /* Teal color for button */
             color: white; /* High contrast */
-            font-size: 1.2em; /* Larger font size */
-            border-radius: 5px; /* Smooth rounded corners */
+            font-size: 1.2em; /* Larger font */
+            border-radius: 5px; /* Rounded corners */
             transition: background-color 0.3s; /* Smooth transition */
         }
 
@@ -98,38 +107,29 @@
         </div>
     </nav>
 
-    <!-- Registration container -->
-    <div class="register-container"> <!-- Centered container for the registration form -->
-        <h2 class="text-center">Create an Account</h2> <!-- Page heading -->
-        <form method="post" action="{% url 'quiz:register' %}"> <!-- Form for registration -->
-            {% csrf_token %} <!-- CSRF token for security -->
-            <div class="form-group"> <!-- Username input -->
-                <input type="text" class="form-control" name="username" placeholder="Enter a username" required>
-            </div>
-            <div class="form-group"> <!-- Password input -->
-                <input type="password" class="form-control" name="password" placeholder="Enter a password" required>
-            </div>
-            <div class="form-group"> <!-- Email input -->
-                <input type="email" class="form-control" name="email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group"> <!-- Contact input -->
-                <input type="tel" class="form-control" name="contact" placeholder="Enter your contact number" pattern="\d{13}" required>
-            </div>
-            <div class="form-group"> <!-- Operator selection -->
-                <select class="form-control" name="operator" required>
-                    <option value="">Select an Operator</option>
-                    <option value="GrameenPhone">GrameenPhone</option>
-                    <option value="Banglalink">Banglalink</option>
-                    <option value="Robi">Robi</option>
-                    <option value="Teletalk">Teletalk</option>
-                </select>
-            </div>
-            <div class="text-center"> <!-- Submit button -->
-                <button type="submit" class="btn btn-custom">Register</button> <!-- Custom button -->
-            </div>
-        </form>
-
-        <p class="text-center mt-3">Already have an account? <a href="{% url 'quiz:login' %}">Login here</a></p> <!-- Link to login page -->
+    <!-- Contact container -->
+    <div class="container">
+        <h2 class="contact-heading animate__animated animate__fadeIn">Contact BrainFlex</h2> <!-- Page heading -->
+        <div class="contact-form"> <!-- Centered form for contact -->
+            <form method="POST" action="{% url 'quiz:contact' %}"> <!-- Form for contact -->
+                {% csrf_token %} <!-- CSRF token for security -->
+                <div class="form-group"> <!-- Name input -->
+                    <input type="text" class="form-control" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group"> <!-- Email input -->
+                    <input type="email" class="form-control" name="email" placeholder="Your email" required>
+                </div>
+                <div class="form-group"> <!-- Subject input -->
+                    <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                </div>
+                <div class="form-group"> <!-- Message textarea -->
+                    <textarea class="form-control" name="message" rows="4" placeholder="Your message" required></textarea>
+                </div>
+                <div class="text-center"> <!-- Submit button -->
+                    <button type="submit" class="btn btn-custom">Send Message</button> <!-- Custom button -->
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Footer -->

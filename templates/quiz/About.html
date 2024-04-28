@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to BrainFlex</title>
+    <title>About BrainFlex</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS for responsive design -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Animation Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -12,25 +12,25 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif; /* Modern font for readability */
-            background-color: #eceff1; /* Light gray for a cleaner look */
+            background-color: #f8f9fa; /* Light gray background */
             margin: 0;
             padding: 0;
         }
 
         /* Navbar styling */
         .navbar {
-            background-color: #2c3e50; /* Darker navbar for contrast */
+            background-color: #2c3e50; /* Dark navbar for contrast */
             padding: 15px; /* Padding for comfort */
         }
 
         .navbar-brand {
-            font-size: 1.5em; /* Larger font size for brand name */
+            font-size: 1.5em; /* Larger font for brand name */
             color: white; /* High contrast for readability */
         }
 
         .navbar-nav .nav-link {
             color: white; /* White links for visibility */
-            font-size: 1.2em; /* Larger font size for better readability */
+            font-size: 1.2em; /* Larger font for readability */
             transition: color 0.3s; /* Smooth transition on hover */
         }
 
@@ -38,48 +38,22 @@
             color: #18bc9c; /* Change color on hover */
         }
 
-        /* Landing page specific styles */
-        .landing-container {
-            height: 85vh; /* Adjusted height to accommodate navbar */
-            background-image: url('https://images.pexels.com/photos/4004374/pexels-photo-4004374.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); /* High-res background image */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            color: white;
-            animation: fadeIn 2s; /* Smooth fade-in animation */
+        /* About section styling */
+        .container {
+            padding-top: 2em; /* Consistent padding */
+            padding-bottom: 2em; /* Consistent padding */
         }
 
-        /* Typography */
-        h1 {
-            font-size: 3.5em; /* Larger font size for striking effect */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
-            margin-bottom: 20px;
+        .about-heading {
+            text-align: center; /* Centered text */
+            font-size: 2.5em; /* Larger font for heading */
+            margin-bottom: 20px; /* Space below heading */
         }
 
-        p {
-            font-size: 1.8em; /* Larger font for emphasis */
-            margin-bottom: 30px;
-        }
-
-        /* Call-to-action button */
-        .cta-button {
-            background-color: #18bc9c; /* Teal for a vibrant look */
-            color: white;
-            font-size: 1.5em;
-            padding: 12px 32px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            transition: background-color 0.3s, transform 0.3s; /* Smooth hover transitions */
-            text-decoration: none;
-        }
-
-        .cta-button:hover {
-            background-color: #16a085; /* Darker on hover */
-            transform: scale(1.1); /* Slightly larger on hover */
+        .about-description {
+            font-size: 1.5em; /* Larger font for readability */
+            text-align: justify; /* Justify text for better layout */
+            padding: 0 20px; /* Padding for comfort */
         }
 
         /* Footer styling */
@@ -94,12 +68,6 @@
             height: 100px;
             bottom: 0;
             width: 100%;
-        }
-
-        /* Keyframes for smooth animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
     </style>
 </head>
@@ -119,12 +87,12 @@
         </div>
     </nav>
 
-    <!-- Landing content -->
-    <div class="landing-container"> <!-- Centralized landing content -->
-        <h1 class="animate__animated animate__fadeIn">Welcome to BrainFlex</h1> <!-- Main heading -->
-        <p>Your gateway to the best quiz experience!</p> <!-- Subheading with updated text -->
-        <!-- Call-to-action with animation -->
-        <a href="{% url 'quiz:login' %}" class="cta-button animate__animated animate__bounceIn">Start Playing!</a>
+    <!-- About section -->
+    <div class="container">
+        <h2 class="about-heading animate__animated animate__fadeIn">About BrainFlex</h2> <!-- Page heading -->
+        <p class="about-description animate__animated animate__fadeIn">
+            BrainFlex is a dynamic quiz platform designed to provide an engaging and interactive experience for users. Our mission is to create a platform that challenges users with thought-provoking quizzes while fostering a sense of community and fun. Whether you're into general knowledge, science, or history, BrainFlex has something for everyone.
+        </p>
     </div>
 
     <!-- Footer -->
