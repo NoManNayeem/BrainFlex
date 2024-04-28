@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to BrainFlex</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> <!-- Animation Library -->
+    <style>
+        /* Custom styles for the landing page */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* Use a common sans-serif font */
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        .landing-container {
+            height: 100vh; /* Full viewport height */
+            background-image: url('https://images.pexels.com/photos/4004374/pexels-photo-4004374.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); /* Background image */
+            background-size: cover; /* Cover the whole background */
+            background-position: center; /* Centered background */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            flex-direction: column; /* Arrange elements vertically */
+            text-align: center; /* Centered text */
+            color: white; /* White text for contrast */
+            animation: fadeIn 2s; /* Animation effect */
+        }
+
+        h1 {
+            font-size: 3em; /* Large font size */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+            margin-bottom: 20px; /* Add space below heading */
+        }
+
+        p {
+            font-size: 1.5em; /* Larger font size */
+            margin-bottom: 30px; /* Add space below paragraph */
+        }
+
+        .cta-button {
+            background-color: #007bff; /* Bootstrap primary color */
+            color: white; /* White text */
+            font-size: 1.5em; /* Large font size */
+            padding: 10px 30px; /* Padding for button */
+            border-radius: 5px; /* Rounded corners */
+            text-transform: uppercase; /* Uppercase text */
+            transition: background-color 0.3s, transform 0.3s; /* Smooth transition effect */
+            text-decoration: none; /* No underline */
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3; /* Darken on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="landing-container"> <!-- Container for landing content -->
+    <h1>Welcome to BrainFlex</h1> <!-- Main heading -->
+    <p>The Ultimate Quiz Platform</p> <!-- Subheading or description -->
+    <a href="{% url 'quiz:login' %}" class="cta-button animate__animated animate__bounceIn">Play Now!</a> <!-- CTA button with animation -->
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- jQuery -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
+</body>
+</html>

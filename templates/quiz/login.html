@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BrainFlex</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
+    <style>
+        /* Custom styles for login page */
+        body {
+            {% comment %} background-color: #f8f9fa; /* Light gray background */ {% endcomment %}
+            background: rgb(2,0,36);
+            background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(146,14,228,1) 65%, rgba(0,212,255,1) 100%);
+        }
+
+        .login-container {
+            max-width: 500px; /* Limit container width for better readability */
+            margin: 50px auto; /* Center the container vertically */
+            padding: 30px; /* Add padding for better spacing */
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+        }
+
+        .login-container h2 {
+            margin-bottom: 30px; /* Add space below heading */
+            color: #007bff; /* Bootstrap primary color for heading */
+        }
+
+        .form-control:focus {
+            border-color: #007bff; /* Highlight input on focus */
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add box shadow on focus */
+        }
+
+        .btn-custom {
+            background-color: #007bff; /* Bootstrap primary color for button */
+            color: white;
+            font-size: 1.1em; /* Larger font size */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s; /* Smooth transition effect */
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3; /* Darken on hover */
+        }
+
+        .text-center {
+            text-align: center; /* Centered text */
+        }
+
+        .mt-3 {
+            margin-top: 15px; /* Add margin on top */
+        }
+    </style>
+</head>
+<body>
+<div class="login-container"> <!-- Container for login form -->
+    <h2 class="text-center">Login to BrainFlex</h2> <!-- Page heading -->
+    <form method="POST" action="{% url 'quiz:login' %}"> <!-- Form action points to the login view -->
+        {% csrf_token %} <!-- CSRF token for security -->
+        <div class="form-group"> <!-- Group for username -->
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+        <div class="form-group"> <!-- Group for password -->
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div class="text-center"> <!-- Centered submit button -->
+            <button type="submit" class="btn btn-custom">Login</button>
+        </div>
+    </form>
+    <p class="text-center mt-3">Don't have an account? <a href="{% url 'quiz:register' %}">Register here</a></p> <!-- Link to registration page -->
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- jQuery -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
+</body>
+</html>

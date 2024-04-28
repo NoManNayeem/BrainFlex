@@ -1,0 +1,159 @@
+<!-- quiz/templates/quiz/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainFlex - Home</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animation Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .jumbotron {
+            background-color: #f8f9fa; /* Light background color */
+            margin-bottom: 0; /* No margin below the jumbotron */
+        }
+        .navbar-nav {
+            margin-left: auto; /* Aligns items to the right */
+        }
+        .table {
+            border-collapse: collapse; /* Removes unwanted spacing */
+        }
+        .table th, .table td {
+            padding: 8px; /* Padding for table cells */
+        }
+        .container {
+            padding-top: 2em; /* Consistent padding across sections */
+        }
+    </style>
+    <!-- Chart.js for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation bar with user icon and logout link -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'quiz:home' %}">BrainFlex</a> <!-- Brand with link -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> <!-- Toggle button for smaller screens -->
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Other nav items -->
+                <li class="nav-item dropdown"> <!-- User icon with dropdown -->
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i> <!-- FontAwesome icon -->
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> <!-- Right-aligned dropdown -->
+                        <a class="dropdown-item" href="{% url 'quiz:logout' %}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="jumbotron text-center animate__animated animate__fadeIn">
+        <h1 class="display-4">Welcome to BrainFlex!</h1>
+        <p class="lead">Your platform for exciting and engaging quizzes.</p>
+    </div>
+
+    <!-- Campaign Table Section -->
+    <div class="container my-4"> <!-- Padding between sections -->
+        <h2 class="animate__animated animate__fadeIn">Ongoing Campaigns</h2>
+        <table class="table table-striped table-bordered"> <!-- Border for clearer visibility -->
+            <thead>
+                <tr>
+                    <th>Campaign Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>General Knowledge Quiz</td>
+                    <td>2024-05-01</td>
+                    <td>2024-06-01</td>
+                    <td>Ongoing</td>
+                </tr>
+                <tr>
+                    <td>History Quiz</td>
+                    <td>2024-05-15</td>
+                    <td>2024-06-15</td>
+                    <td>Upcoming</td>
+                </tr>
+                <tr>
+                    <td>Science Quiz</td>
+                    <td>2024-06-01</td>
+                    <td>2024-07-01</td>
+                    <td>Upcoming</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="container"> <!-- Padding for consistency -->
+        <h2 class="animate__animated animate__fadeIn">Performance Overview</h2>
+        <div class="row">
+            <!-- Pie Chart -->
+            <div class="col-md-6"> <!-- Half-width for responsive layout -->
+                <h3>Quiz Participation</h3>
+                <canvas id="pieChart"></canvas>
+            </div>
+            <!-- Line Chart -->
+            <div class="col-md-6"> <!-- Half-width for responsive layout -->
+                <h3>Quiz Trends</h3>
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js scripts for dummy data -->
+    <script>
+        // Pie Chart
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['General Knowledge', 'History', 'Science'],
+                datasets: [{
+                    data: [45, 25, 30],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#ffce56']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+
+        // Line Chart
+        const lineCtx = document.getElementById('lineChart').getContext('2d');
+        new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Quiz Participation',
+                    data: [10, 20, 30, 40],
+                    borderColor: '#36a2eb',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+    </script>
+</body>
+</html>
