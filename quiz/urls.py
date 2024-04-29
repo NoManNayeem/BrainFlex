@@ -7,6 +7,7 @@ from .views.try_now import try_now_page
 from .views.home import home_page
 from .views.about_contact import about_view, contact_view
 from quiz.views.campaignViews.views import campaign_detail_view
+from quiz.views.termsCondition import privacy_policy, terms_of_service
 
 app_name = 'quiz'
 
@@ -18,6 +19,9 @@ urlpatterns = [
     
     path('about/', about_view, name='about'),  # URL pattern for the "About" page
     path('contact/', contact_view, name='contact'),  # URL pattern for the "Contact" page
+    path('privacy-policy/', privacy_policy, name='privacy_policy'),
+    path('terms-of-service/', terms_of_service, name='terms_of_service'),
+    
 
     
     path('campaign/', campaign_detail_view, name='campaign_detail'),
