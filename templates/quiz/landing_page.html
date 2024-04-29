@@ -2,101 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to BrainFlex</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Animation Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom styles -->
     <style>
         body {
-            font-family: 'Roboto', sans-serif; /* Modern font for readability */
-            background-color: #eceff1; /* Light gray for a cleaner look */
-            margin: 0;
-            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #eceff1;
         }
-
-        /* Navbar styling */
         .navbar {
-            background-color: #2c3e50; /* Darker navbar for contrast */
-            padding: 15px; /* Padding for comfort */
+            background-color: #2c3e50;
         }
-
-        .navbar-brand {
-            font-size: 1.5em; /* Larger font size for brand name */
-            color: white; /* High contrast for readability */
+        .navbar-brand, .nav-link {
+            color: white;
         }
-
-        .navbar-nav .nav-link {
-            color: white; /* White links for visibility */
-            font-size: 1.2em; /* Larger font size for better readability */
-            transition: color 0.3s; /* Smooth transition on hover */
+        .nav-link:hover {
+            color: #18bc9c;
         }
-
-        .navbar-nav .nav-link:hover {
-            color: #18bc9c; /* Change color on hover */
-        }
-
-        /* Landing page specific styles */
         .landing-container {
-            height: 85vh; /* Adjusted height to accommodate navbar */
-            background-image: url('https://images.pexels.com/photos/4004374/pexels-photo-4004374.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); /* High-res background image */
+            height: 85vh;
+            background-image: url('https://images.pexels.com/photos/4004374/pexels-photo-4004374.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
             background-size: cover;
-            background-position: center;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             flex-direction: column;
             text-align: center;
             color: white;
-            animation: fadeIn 2s; /* Smooth fade-in animation */
+            animation: fadeIn 2s;
         }
-
-        /* Typography */
-        h1 {
-            font-size: 3.5em; /* Larger font size for striking effect */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 1.8em; /* Larger font for emphasis */
-            margin-bottom: 30px;
-        }
-
-        /* Call-to-action button */
-        .cta-button {
-            background-color: #18bc9c; /* Teal for a vibrant look */
+        .cta-button, .try-button {
+            background-color: #18bc9c;
             color: white;
-            font-size: 1.5em;
-            padding: 12px 32px;
-            border-radius: 6px;
+            padding: 10px 20px;
+            border-radius: 5px;
             text-transform: uppercase;
-            transition: background-color 0.3s, transform 0.3s; /* Smooth hover transitions */
-            text-decoration: none;
         }
-
-        .cta-button:hover {
-            background-color: #16a085; /* Darker on hover */
-            transform: scale(1.1); /* Slightly larger on hover */
+        .cta-button:hover, .try-button:hover {
+            background-color: #16a085;
+            transform: scale(1.1);
         }
-
-        /* Footer styling */
         .footer {
-            background-color: #2c3e50; /* Matching navbar color */
-            color: white; /* High contrast for readability */
-            padding: 20px; /* Padding for comfort */
-            text-align: center; /* Centered text */
-            font-size: 1.2em; /* Larger font for readability */
-            
-            position: fixed;
-            height: 100px;
-            bottom: 0;
-            width: 100%;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
-
-        /* Keyframes for smooth animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -104,36 +59,35 @@
     </style>
 </head>
 <body>
-    <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="#">BrainFlex</a> <!-- Brand name -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span> <!-- Toggle icon for mobile -->
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto"> <!-- Right-aligned nav links -->
-                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-            </ul>
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">BrainFlex</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <!-- Landing content -->
-    <div class="landing-container"> <!-- Centralized landing content -->
-        <h1 class="animate__animated animate__fadeIn">Welcome to BrainFlex</h1> <!-- Main heading -->
-        <p>Your gateway to the best quiz experience!</p> <!-- Subheading with updated text -->
-        <!-- Call-to-action with animation -->
-        <a href="{% url 'quiz:login' %}" class="cta-button animate__animated animate__bounceIn">Start Playing!</a>
+    <div class="landing-container">
+        <h1>BrainFlex</h1>
+        <p>Solve, Succeed, Repeat!</p>
+        <a href="/login" class="cta-button">Start Playing!</a> <br>
+        <a href="/try-BrainFlex" class="try-button">Try Now!</a>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        &copy; 2024 BrainFlex. All rights reserved. | <a href="#" style="color: white; text-decoration: underline;">Privacy Policy</a> | <a href="#" style="color: white; text-decoration: underline;">Terms of Service</a> 
-    </div>
+    <footer class="footer">
+        &copy; 2024 BrainFlex. All rights reserved.
+        <a href="#" style="color: white;">Privacy Policy</a> |
+        <a href="#" style="color: white;">Terms of Service</a>
+    </footer>
 
-    <!-- External scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- jQuery -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
