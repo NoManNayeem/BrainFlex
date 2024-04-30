@@ -214,18 +214,27 @@
     }
 
     function checkAnswer() {
-        const question = questions[currentQuestionIndex];
-        let isCorrect = false;
-        if (question.type === "TEXT") {
-            const input = answerContainer.querySelector("input").value;
-            isCorrect = input.toLowerCase() === question.answer.toLowerCase();
-        } else if (question.type === "MCQ" || question.type === "CHECKBOX") {
-            const selectedOptions = [...answerContainer.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked')]
-                .map(option => option.value);
-            isCorrect = selectedOptions.sort().toString() === question.answer.sort().toString();
-        }
-        if (isCorrect) score++;
-    }
+      const question = questions[currentQuestionIndex];
+      let isCorrect = false;
+  
+      if (question.type === "TEXT") {
+          // Existing scoring logic for text questions
+          const input = answerContainer.querySelector("input").value;
+          isCorrect = input.toLowerCase() === question.answer.toLowerCase();
+      } else if (question.type === "MCQ" || question.type === "CHECKBOX") {
+          // Existing scoring logic for MCQ and Checkbox questions
+          const selectedOptions = [...answerContainer.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked')]
+              .map(option => option.value);
+          isCorrect = selectedOptions.sort().toString() === question.answer.sort().toString();
+      } else if (question.type === "IMAGE") {
+          // Scoring logic for image questions
+          const selectedOption = answerContainer.querySelector('input[type="radio"]:checked');
+          isCorrect = selectedOption && selectedOption.value === question.answer[0];
+      }
+  
+      if (isCorrect) score++;
+  }
+  
 
     function nextQuestion() {
         clearTimeout(timeoutHandle);
@@ -244,9 +253,32 @@
         nextBtn.style.display = "none";
         progressBar.style.display = "none";
         resultContainer.style.display = "block";
-        resultContainer.innerHTML = `<p>You are one of the top 10% of High IQ! </p><h1 class="animate__animated animate__fadeIn">Your Score: ${score}/${questions.length}</h1>
-                    <a href="/register" class="btn btn-success">Sign Up to Play More!</a>`;
-    }
+        resultContainer.innerHTML = `<p>You are one of the top 30% of High IQ! </p><h1 class="animate__animated animate__fadeIn">Your Score: ${score}/${questions.length}</h1>
+                    <a href="/home" class="btn btn-success">Home!</a>`;
+    
+    // Send score to backend
+    $.ajax({
+      type: "POST",
+      url: "/campaign/" + {{ campaign.id }} + "/", // Use Django template syntax to get the campaign ID
+      data: {
+          score: score,
+          total_questions: questions.length,
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+          // Handle success response if needed
+          console.log("Score saved successfully!");
+      },
+      error: function (xhr, status, error) {
+          // Handle error response if needed
+          console.error("Error saving score:", error);
+      }
+  });
+  // Redirect to home page after 20 seconds
+  setTimeout(function() {
+    window.location.href = "/home";
+}, 20000);
+}
 
     nextBtn.addEventListener("click", nextQuestion);
     showQuestion();

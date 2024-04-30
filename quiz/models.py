@@ -72,6 +72,7 @@ class Prize(models.Model):
 
 
 from django.db import models
+from django.conf import settings
 
 class Quiz(models.Model):
     QUESTION_TYPE_CHOICES = [
@@ -91,6 +92,12 @@ class Quiz(models.Model):
 
     def __str__(self):
         return self.question[:50]
+    
+    def get_image_url(self):
+        if self.image:
+            return f"{settings.MEDIA_URL}{self.image}"
+        else:
+            return None
 
 
 
