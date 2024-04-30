@@ -6,7 +6,7 @@ from .views.landing_page import landing_page
 from .views.try_now import try_now_page
 from .views.home import home_page
 from .views.about_contact import about_view, contact_view
-from quiz.views.campaignViews.views import campaign_detail_view
+from quiz.views.campaignViews.views import participate
 from quiz.views.termsCondition import privacy_policy, terms_of_service
 
 app_name = 'quiz'
@@ -24,7 +24,7 @@ urlpatterns = [
     
 
     
-    path('campaign/', campaign_detail_view, name='campaign_detail'),
+    path('campaign/<int:campaign_id>/', participate, name='campaign_detail'),
 
     
     path('login/', login_view, name='login'),

@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -16,10 +17,19 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def save(self, *args, **kwargs):
+        try:
+            super().save(*args, **kwargs)
+        except ValidationError as e:
+            if 'unique' in e.message_dict.get('contact', []):
+                raise ValidationError({'contact': 'This contact already exists.'})
+            else:
+                raise
 
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class Campaign(models.Model):
     STATUS_CHOICES = [
@@ -41,6 +51,9 @@ class Campaign(models.Model):
     def __str__(self):
         return self.name
 
+    def clean(self):
+        if self.start_date and self.end_date and self.start_date >= self.end_date:
+            raise ValidationError("End date must be after start date.")
 
 class Prize(models.Model):
     PRIZE_CHOICES = [
@@ -64,17 +77,21 @@ class Quiz(models.Model):
     QUESTION_TYPE_CHOICES = [
         ('TEXT', 'Text'),
         ('MCQ', 'Multiple Choice'),
-        ('CHECKBOX', 'Checkbox')
+        ('CHECKBOX', 'Checkbox'),
+        ('IMAGE', 'Image')
     ]
-
+    
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     question = models.TextField()
     type = models.CharField(max_length=10, choices=QUESTION_TYPE_CHOICES)
     choices = models.TextField(blank=True, null=True, help_text="Enter choices separated by commas. Only required for MCQ and Checkbox type questions.")
     answer = models.CharField(max_length=255)
     duration = models.PositiveIntegerField(default=30, help_text="Duration in seconds")
+    image = models.ImageField(upload_to='quiz_images/', blank=True, null=True, help_text="Upload an image for the question. Only required for Image type questions.")
 
     def __str__(self):
         return self.question[:50]
+
 
 
 from django.db import models
@@ -84,9 +101,11 @@ class Participation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='participations')
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE, related_name='participations')
     participation_date = models.DateTimeField(auto_now_add=True)
+    score = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ('user', 'campaign')  # This ensures each user can only participate in each campaign once
 
     def __str__(self):
         return f"{self.user.username} - {self.campaign.name}"
+

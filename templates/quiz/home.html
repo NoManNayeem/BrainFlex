@@ -212,10 +212,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          
           <!-- Logout option -->
           <li class="nav-item mr-2">
-            <a class="nav-link " href="/logout"
+            <a class="nav-link" href="/logout"
               ><i class="fas fa-sign-out-alt"></i> Logout</a
             >
           </li>
@@ -294,7 +293,9 @@
                 <span class="line">|</span>
               </p>
               <button type="button" class="btn btn-info text-white btn-lg mt-2">
-                <a href="/campaign" class="text-white button">Play Now!</a>
+                <a href="#campaign_section" class="text-white button"
+                  >Play Now!</a
+                >
               </button>
             </div>
           </div>
@@ -302,90 +303,103 @@
       </div>
     </div>
 
-    <div class="container mt-4 mb-4">
-      <!-- Campaign table section -->
+    <!-- Campaign table section -->
+    <div class="container mt-4 mb-4" id="campaign_section">
       <h2 class="text-center">Campaigns</h2>
-      <table class="campaign-table table table-striped table-bordered table-dark">
-        <thead>
+      <div class="table-responsive">
+        <table
+          class="campaign-table table table-striped table-bordered table-dark"
+        >
+          <thead>
             <tr>
-                <th>Campaign Name</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Prizes</th>
-                <th>Action</th>
+              <th>Campaign Name</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
             {% for campaign in campaigns %}
             <tr>
-                <td>{{ campaign.name }}</td>
-                <td>{{ campaign.start_date }}</td>
-                <td>{{ campaign.end_date }}</td>
-                <td>{{ campaign.status }}</td>
-                <td>
-                    <a href="/campaign" class="btn btn-primary mx-2 my-2">Play Now</a>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#campaignDetailsModal-{{ campaign.id }}">
-                        Details
-                    </button>
-                </td>
+              <td>{{ campaign.name }}</td>
+              <td>{{ campaign.start_date }}</td>
+              <td>{{ campaign.end_date }}</td>
+              <td>{{ campaign.status }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  data-toggle="modal"
+                  data-target="#campaignDetailsModal-{{ campaign.id }}"
+                >
+                  Let's Play!
+                </button>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5" class="text-center">No campaigns available.</td>
             </tr>
             {% endfor %}
-        </tbody>
-    </table>
-    
-    </div>
-
-    <!-- Campaign Details Modal -->
-{% for campaign in campaigns %}
-<div
-  class="modal fade"
-  id="campaignDetailsModal-{{ campaign.id }}"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="campaignDetailsModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="campaignDetailsModalLabel">
-          Campaign Details - {{ campaign.name }}
-        </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>{{ campaign.description }}</p>
-        <h6>Prizes:</h6>
-        <ul>
-          {% for prize in campaign.prizes.all %}
-            <li>{{ prize.prize_detail }}: {{ prize.prize_description }}</li>
-          {% empty %}
-            <li>No prizes listed.</li>
-          {% endfor %}
-        </ul>
-        <!-- More details can be added here -->
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-dismiss="modal"
-        >
-          Close
-        </button>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
-</div>
-{% endfor %}
 
+    <!-- Campaign Details Modals -->
+    {% for campaign in campaigns %}
+    <div
+      class="modal fade"
+      id="campaignDetailsModal-{{ campaign.id }}"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="campaignDetailsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="campaignDetailsModalLabel">
+              Campaign Details - {{ campaign.name }}
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>{{ campaign.description }}</p>
+            <h6>Prizes:</h6>
+            <ul>
+              {% for prize in campaign.prizes.all %}
+              <li>{{ prize.prize_detail }}: {{ prize.prize_description }}</li>
+              {% empty %}
+              <li>No prizes listed.</li>
+              {% endfor %}
+            </ul>
+            <!-- More details can be added here -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <a href="/campaign/{{ campaign.id }}/" class="btn btn-primary"
+              >Play Now</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
 
     <!-- Footer -->
     <div class="footer">
@@ -394,7 +408,9 @@
         >Privacy Policy</a
       >
       |
-      <a href="terms-of-service/" style="color: white; text-decoration: underline"
+      <a
+        href="terms-of-service/"
+        style="color: white; text-decoration: underline"
         >Terms of Service</a
       >
     </div>
