@@ -2,6 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+# Update the Profile model to use signals to save first_name and last_name
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     contact = models.CharField(max_length=13, unique=True)
@@ -13,9 +23,11 @@ class Profile(models.Model):
     )
     operator = models.CharField(max_length=2, choices=OPERATOR_CHOICES)
     email = models.EmailField()
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True, help_text="Upload a profile picture.")
 
     def __str__(self):
         return self.user.username
+
 
     def save(self, *args, **kwargs):
         try:
